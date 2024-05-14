@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<title>Teste API</title>
+</head>
+<body>
+  <button id="createButton">Criar Item</button>
+<button id="deleteButton">Deletar Item</button>
+
+<script>
+// Deletar Item
+document.getElementById('deleteButton').addEventListener('click', function() {
+  fetch('http://localhost:1337/item/1', {
+    method: 'DELETE'
+  })
+  .then(response => response.text())
+  .then(result => console.log('Success:', result))
+  .catch(error => console.error('Error:', error));
+});
+
+// Criar Item
+document.getElementById('createButton').addEventListener('click', function() {
+  fetch('http://localhost:1337/item', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ nome: 'Nome do Novo Item', descricao: 'Descrição do Novo Item' })
+  })
+  .then(response => response.json())
+  .then(data => console.log('Success:', data))
+  .catch((error) => console.error('Error:', error));
+});
+</script>
+</body>
+</html>
+
